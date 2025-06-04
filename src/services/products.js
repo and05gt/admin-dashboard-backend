@@ -10,22 +10,30 @@ export const createProduct = async (payload) => {
   return product;
 };
 
-export const updateProduct = async (productId, payload, userId) => {
+export const updateProduct = async (productId, payload, options = {}) => {
   const result = await ProductsCollection.findOneAndUpdate(
     {
       _id: productId,
-      userId,
     },
     payload,
-    { new: true },
+    {
+      new: true,
+      includeResultMetadata: true,
+      ...options,
+    },
   );
-  return result;
+
+  if (!result || !result.value) return null;
+
+  return {
+    product: result.value,
+    isNew: Boolean(result?.lastErrorObject?.upserted),
+  };
 };
 
-export const deleteProduct = async (productId, userId) => {
+export const deleteProduct = async (productId) => {
   const result = await ProductsCollection.findOneAndDelete({
     _id: productId,
-    userId,
   });
   return result;
 };
