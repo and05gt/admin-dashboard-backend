@@ -4,9 +4,8 @@ This project implements the backend part of the application, which provides func
 
 ## Main components and functionality
 
-- **API Endpoints:**
+- **API Endpoints:** A set of API endpoints has been implemented for interaction with the frontend. It includes endpoints for:
 
-  - A set of API endpoints has been implemented for interaction with the frontend. It includes endpoints for:
   - User login.
   - Retrieving data (e.g., list of boards, columns, cards).
   - Saving and updating data (creating new boards, adding columns, editing cards, etc.).
@@ -43,9 +42,8 @@ http://
 
 ## Основні компоненти та функціональність
 
-- **API Ендпоінти:**
+- **API Ендпоінти:** Реалізовано набір API ендпоінтів для взаємодії з фронтендом. Включає ендпоінти для:
 
-  - Реалізовано набір API ендпоінтів для взаємодії з фронтендом. Включає ендпоінти для:
   - Входу користувачів в систему.
   - Отримання даних (наприклад, списку дошок, колонок, карток).
   - Збереження та оновлення даних (створення нових дошок, додавання колонок, редагування карток тощо).
