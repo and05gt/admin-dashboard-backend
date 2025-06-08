@@ -1,7 +1,7 @@
 import express from 'express';
 import cors from 'cors';
 import pino from 'pino-http';
-import productsRouter from './routers/products.js';
+import router from './routers/index.js';
 import { getEnvVar } from './utils/getEnvVar.js';
 import { errorHandler } from './middlewares/errorHandler.js';
 // import { notFoundHandler } from './middlewares/notFoundHandler.js';
@@ -22,7 +22,7 @@ export const startServer = () => {
     }),
   );
 
-  app.use(productsRouter);
+  app.use(router);
 
   // app.use('*', notFoundHandler);
 

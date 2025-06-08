@@ -4,7 +4,6 @@ import {
   getAllProducts,
   updateProduct,
 } from '../services/products.js';
-
 import createHttpError from 'http-errors';
 
 export const getProductsController = async (req, res) => {

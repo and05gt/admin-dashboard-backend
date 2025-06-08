@@ -6,20 +6,27 @@ import {
   upsertProductController,
 } from '../controllers/products.js';
 import { ctrlWrapper } from '../utils/ctrlWrapper.js';
-import { isValidId } from '../utils/isValidId.js';
+import { isValidProductId } from '../utils/isValidId.js';
+import { validateBody } from '../middlewares/validateBody.js';
+import { createProductSchema } from '../validation/products.js';
 
 const router = Router();
 
-router.get('/api/products', ctrlWrapper(getProductsController));
-router.post('/api/products', ctrlWrapper(createProductController));
+router.get('/', ctrlWrapper(getProductsController));
+router.post(
+  '/',
+  validateBody(createProductSchema),
+  ctrlWrapper(createProductController),
+);
 router.put(
-  '/api/products/:productId',
-  isValidId,
+  '/:productId',
+  isValidProductId,
+  validateBody(createProductSchema),
   ctrlWrapper(upsertProductController),
 );
 router.delete(
-  '/api/products/:productId',
-  isValidId,
+  '/:productId',
+  isValidProductId,
   ctrlWrapper(deleteProductController),
 );
 
