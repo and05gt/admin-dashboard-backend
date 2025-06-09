@@ -1,8 +1,18 @@
 import createHttpError from 'http-errors';
 import { getAllCustomers, getCustomerById } from '../services/customers.js';
+import { parsePaginationParams } from '../utils/parsePaginationParams.js';
+import { parseSortParams } from '../utils/parseSortParams.js';
 
 export const getCustomersController = async (req, res) => {
-  const customers = await getAllCustomers();
+  const { page, perPage } = parsePaginationParams(req.query);
+  const { sortOrder, sortBy } = parseSortParams(req.query);
+
+  const customers = await getAllCustomers({
+    page,
+    perPage,
+    sortOrder,
+    sortBy,
+  });
 
   res.json({
     status: 200,

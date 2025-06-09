@@ -4,9 +4,19 @@ import {
   getAllSuppliers,
   updateSupplier,
 } from '../services/suppliers.js';
+import { parsePaginationParams } from '../utils/parsePaginationParams.js';
+import { parseSortParams } from '../utils/parseSortParams.js';
 
 export const getSuppliersController = async (req, res) => {
-  const suppliers = await getAllSuppliers();
+  const { page, perPage } = parsePaginationParams(req.query);
+  const { sortOrder, sortBy } = parseSortParams(req.query);
+
+  const suppliers = await getAllSuppliers({
+    page,
+    perPage,
+    sortOrder,
+    sortBy,
+  });
 
   res.json({
     status: 200,

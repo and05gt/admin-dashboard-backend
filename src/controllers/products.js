@@ -5,9 +5,19 @@ import {
   updateProduct,
 } from '../services/products.js';
 import createHttpError from 'http-errors';
+import { parsePaginationParams } from '../utils/parsePaginationParams.js';
+import { parseSortParams } from '../utils/parseSortParams.js';
 
 export const getProductsController = async (req, res) => {
-  const products = await getAllProducts();
+  const { page, perPage } = parsePaginationParams(req.query);
+  const { sortOrder, sortBy } = parseSortParams(req.query);
+
+  const products = await getAllProducts({
+    page,
+    perPage,
+    sortOrder,
+    sortBy,
+  });
 
   res.json({
     status: 200,
