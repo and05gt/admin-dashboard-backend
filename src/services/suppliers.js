@@ -7,20 +7,26 @@ export const getAllSuppliers = async ({
   perPage = 10,
   sortOrder = SORT_ORDER.ASC,
   sortBy = '_id',
+  filter = {},
 }) => {
   const limit = perPage;
   const skip = (page - 1) * perPage;
 
   const suppliersQuery = SuppliersCollection.find();
-  const suppliersCount = await SuppliersCollection.find()
-    .merge(suppliersQuery)
-    .countDocuments();
 
-  const suppliers = await suppliersQuery
-    .skip(skip)
-    .limit(limit)
-    .sort({ [sortBy]: sortOrder })
-    .exec();
+  if (filter.name) {
+    suppliersQuery.where('name').equals(filter.name);
+  }
+
+  const [suppliersCount, suppliers] = await Promise.all([
+    SuppliersCollection.find().merge(suppliersQuery).countDocuments(),
+    suppliersQuery
+      .skip(skip)
+      .limit(limit)
+      .sort({ [sortBy]: sortOrder })
+      .exec(),
+  ]);
+
   const paginationData = calculatePaginationData(suppliersCount, page, perPage);
 
   return { data: suppliers, ...paginationData };

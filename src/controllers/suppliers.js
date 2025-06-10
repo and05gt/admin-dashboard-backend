@@ -6,16 +6,19 @@ import {
 } from '../services/suppliers.js';
 import { parsePaginationParams } from '../utils/parsePaginationParams.js';
 import { parseSortParams } from '../utils/parseSortParams.js';
+import { parseFilterParams } from '../utils/parseFilterParams.js';
 
 export const getSuppliersController = async (req, res) => {
   const { page, perPage } = parsePaginationParams(req.query);
   const { sortOrder, sortBy } = parseSortParams(req.query);
+  const filter = parseFilterParams(req.query);
 
   const suppliers = await getAllSuppliers({
     page,
     perPage,
     sortOrder,
     sortBy,
+    filter,
   });
 
   res.json({

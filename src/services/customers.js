@@ -7,20 +7,26 @@ export const getAllCustomers = async ({
   perPage = 10,
   sortOrder = SORT_ORDER.ASC,
   sortBy = '_id',
+  filter = {},
 }) => {
   const limit = perPage;
   const skip = (page - 1) * perPage;
 
   const customersQuery = CustomersCollection.find();
-  const customersCount = await CustomersCollection.find()
-    .merge(customersQuery)
-    .countDocuments();
 
-  const customers = await customersQuery
-    .skip(skip)
-    .limit(limit)
-    .sort({ [sortBy]: sortOrder })
-    .exec();
+  if (filter.name) {
+    customersQuery.where('name').equals(filter.name);
+  }
+
+  const [customersCount, customers] = await Promise.all([
+    CustomersCollection.find().merge(customersQuery).countDocuments(),
+    customersQuery
+      .skip(skip)
+      .limit(limit)
+      .sort({ [sortBy]: sortOrder })
+      .exec(),
+  ]);
+
   const paginationData = calculatePaginationData(customersCount, page, perPage);
 
   return {
