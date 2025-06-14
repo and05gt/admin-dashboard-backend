@@ -1,8 +1,8 @@
-import { randomBytes } from 'crypto';
 import createHttpError from 'http-errors';
 import { User } from '../db/models/user.js';
 import { Session } from '../db/models/session.js';
 import { FIFTEEN_MINUTES, THIRTY_DAYS } from '../constants/index.js';
+import { generateTokens } from '../utils/token.js';
 
 export const loginUser = async (payload) => {
   const user = await User.findOne({
@@ -17,10 +17,12 @@ export const loginUser = async (payload) => {
     userId: user._id,
   });
 
+  const { accessToken, refreshToken } = generateTokens(user);
+
   return await Session.create({
     userId: user._id,
-    accessToken: randomBytes(30).toString('base64'),
-    refreshToken: randomBytes(30).toString('base64'),
+    accessToken,
+    refreshToken,
     accessTokenValidUntil: new Date(Date.now() + FIFTEEN_MINUTES),
     refreshTokenValidUntil: new Date(Date.now() + THIRTY_DAYS),
   });
@@ -51,17 +53,23 @@ export const refreshUserSession = async ({ sessionId, refreshToken }) => {
     refreshToken,
   });
 
+  const user = await User.findOne({
+    _id: session.userId,
+  });
+
+  const token = generateTokens(user);
+
   return await Session.create({
     userId: session.userId,
-    accessToken: randomBytes(30).toString('base64'),
-    refreshToken: randomBytes(30).toString('base64'),
+    accessToken: token.accessToken,
+    refreshToken: token.refreshToken,
     accessTokenValidUntil: new Date(Date.now() + FIFTEEN_MINUTES),
     refreshTokenValidUntil: new Date(Date.now() + THIRTY_DAYS),
   });
 };
 
-export const getCurrentUser = async () => {
-  const user = await User.find();
+export const getCurrentUser = async (payload) => {
+  const user = await User.findById(payload);
 
   if (!user) {
     throw createHttpError(404, 'User not found');

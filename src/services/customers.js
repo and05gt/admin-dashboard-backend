@@ -14,8 +14,13 @@ export const getAllCustomers = async ({
 
   const customersQuery = CustomersCollection.find();
 
+  // if (filter.name) {
+  //   customersQuery.where('name').equals(filter.name);
+  // }
+
   if (filter.name) {
-    customersQuery.where('name').equals(filter.name);
+    const nameRegex = new RegExp(filter.name, 'i');
+    customersQuery.where('name').regex(nameRegex);
   }
 
   const [customersCount, customers] = await Promise.all([

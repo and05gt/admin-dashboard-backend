@@ -5,7 +5,7 @@ import router from './routers/index.js';
 import { getEnvVar } from './utils/getEnvVar.js';
 import { errorHandler } from './middlewares/errorHandler.js';
 import cookieParser from 'cookie-parser';
-// import { notFoundHandler } from './middlewares/notFoundHandler.js';
+import { notFoundHandler } from './middlewares/notFoundHandler.js';
 
 const PORT = Number(getEnvVar('PORT', 3000));
 
@@ -26,7 +26,7 @@ export const startServer = () => {
 
   app.use(router);
 
-  // app.use('*', notFoundHandler);
+  app.use(notFoundHandler);
 
   app.use(errorHandler);
 
