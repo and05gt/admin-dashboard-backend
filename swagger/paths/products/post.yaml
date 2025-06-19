@@ -1,0 +1,67 @@
+tags:
+  - Products
+summary: Create a new product
+operationId: createProduct
+description: 'Create a new product with payload'
+security:
+  - bearerAuth: []
+requestBody:
+  content:
+    application/json:
+      schema:
+        type: object
+        required:
+          - name
+          - suppliers
+          - stock
+          - price
+          - category
+        properties:
+          name:
+            description: 'Product name'
+            type: string
+            example: 'Ibuprofen'
+          suppliers:
+            description: 'Product suppliers'
+            type: string
+            example: 'Beximco'
+          stock:
+            description: 'Product stock'
+            type: string
+            example: '09'
+          price:
+            description: 'Product price'
+            type: string
+            example: '19.99'
+          category:
+            description: 'Product category'
+            type: string
+            example: 'Head'
+responses:
+  '201':
+    description: 'Successfully created a product!'
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - status
+            - message
+            - data
+          properties:
+            status:
+              type: integer
+              example: 201
+            message:
+              type: string
+              example: 'Successfully created a product!'
+            data:
+              $ref: '../../components/schemas/product.yaml'
+  '400':
+    $ref: '../../components/responses/400.yaml'
+  '401':
+    $ref: '../../components/responses/401.yaml'
+  '403':
+    $ref: '../../components/responses/403.yaml'
+  '500':
+    $ref: '../../components/responses/500.yaml'

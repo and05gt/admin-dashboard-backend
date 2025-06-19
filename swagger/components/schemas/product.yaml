@@ -1,0 +1,33 @@
+type: object
+required:
+  - _id
+  - name
+  - suppliers
+  - stock
+  - price
+  - category
+properties:
+  _id:
+    description: "Product's id"
+    type: string
+    example: '2'
+  name:
+    description: "Product's name"
+    type: string
+    example: 'Ibuprofen'
+  suppliers:
+    description: "Product's suppliers"
+    type: string
+    example: 'Beximco'
+  stock:
+    description: "Product's stock"
+    type: string
+    example: '09'
+  price:
+    description: "Product's price"
+    type: string
+    example: '53.76'
+  category:
+    description: "Product's category"
+    type: string
+    example: 'Head'

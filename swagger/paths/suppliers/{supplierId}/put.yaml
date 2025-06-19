@@ -1,0 +1,97 @@
+tags:
+  - Suppliers
+summary: Update a supplier
+operationId: upsertSupplier
+description: 'Update a supplier with payload'
+security:
+  - bearerAuth: []
+parameters:
+  - in: path
+    name: supplierId
+    required: true
+    schema:
+      type: string
+      example: '683f39697520d923c30c2c12'
+requestBody:
+  content:
+    application/json:
+      schema:
+        type: object
+        required:
+          - name
+          - address
+          - suppliers
+          - date
+          - amount
+          - status
+        properties:
+          name:
+            description: "Supplier's name"
+            type: string
+            example: 'Alex Shatov'
+          address:
+            description: "Supplier's address"
+            type: string
+            example: 'Mripur-1'
+          suppliers:
+            description: "Supplier's suppliers"
+            type: string
+            example: 'Square'
+          date:
+            description: "Supplier's date"
+            type: string
+            example: 'September 19, 2023'
+          amount:
+            description: "Supplier's amount"
+            type: string
+            example: '৳ 6952.53'
+          status:
+            description: "Supplier's status"
+            type: string
+            enum: ['Active', 'Deactive']
+            example: 'Active'
+responses:
+  '201':
+    description: 'Successfully upserted a supplier!'
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - status
+            - message
+            - data
+          properties:
+            status:
+              type: integer
+              example: 201
+            message:
+              type: string
+              example: 'Successfully upserted a supplier!'
+            data:
+              type: object
+              $ref: '../../../components/schemas/supplier.yaml'
+  '400':
+    $ref: '../../../components/responses/400.yaml'
+  '401':
+    $ref: '../../../components/responses/401.yaml'
+  '403':
+    $ref: '../../../components/responses/403.yaml'
+  '404':
+    description: 'Supplier not found'
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - status
+            - message
+          properties:
+            status:
+              type: integer
+              example: 404
+            message:
+              type: string
+              example: 'Supplier not found'
+  '500':
+    $ref: '../../../components/responses/500.yaml'

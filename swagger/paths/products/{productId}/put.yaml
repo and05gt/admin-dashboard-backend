@@ -1,0 +1,85 @@
+tags:
+  - Products
+summary: Update a product
+operationId: upsertProduct
+description: 'Update a product with payload'
+security:
+  - bearerAuth: []
+parameters:
+  - in: path
+    name: productId
+    required: true
+    schema:
+      type: string
+      example: '60c72b2f9b1e8a001c8e4f5a'
+requestBody:
+  content:
+    application/json:
+      schema:
+        type: object
+        properties:
+          name:
+            description: 'Product name'
+            type: string
+            example: 'Ibuprofen'
+          suppliers:
+            description: 'Product suppliers'
+            type: string
+            example: 'Beximco'
+          stock:
+            description: 'Product stock'
+            type: string
+            example: '09'
+          price:
+            description: 'Product price'
+            type: string
+            example: '19.99'
+          category:
+            description: 'Product category'
+            type: string
+            example: 'Head'
+responses:
+  '201':
+    description: 'Successfully upserted a product!'
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - status
+            - message
+            - data
+          properties:
+            status:
+              type: integer
+              example: 201
+            message:
+              type: string
+              example: 'Successfully upserted a product!'
+            data:
+              type: object
+              $ref: '../../../components/schemas/product.yaml'
+  '400':
+    $ref: '../../../components/responses/400.yaml'
+  '401':
+    $ref: '../../../components/responses/401.yaml'
+  '403':
+    $ref: '../../../components/responses/403.yaml'
+  '404':
+    description: 'Product not found'
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - status
+            - message
+          properties:
+            status:
+              type: integer
+              example: 404
+            message:
+              type: string
+              example: 'Product not found'
+  '500':
+    $ref: '../../../components/responses/500.yaml'

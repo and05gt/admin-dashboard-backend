@@ -496,6 +496,1264 @@
           }
         }
       }
+    },
+    "/api/dashboard": {
+      "get": {
+        "tags": [
+          "Dashboard"
+        ],
+        "summary": "Get dashboard data",
+        "operationId": "getDashboardData",
+        "description": "Get dashboard data with this endpoint",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved dashboard data!",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message",
+                    "data"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 200
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Successfully retrieved dashboard data!"
+                    },
+                    "data": {
+                      "type": "object",
+                      "required": [
+                        "allProducts",
+                        "allSuppliers",
+                        "allCustomers",
+                        "lastCustomers",
+                        "incomeExpenses"
+                      ],
+                      "properties": {
+                        "allProducts": {
+                          "type": "integer",
+                          "example": 8430
+                        },
+                        "allSuppliers": {
+                          "type": "integer",
+                          "example": 211
+                        },
+                        "allCustomers": {
+                          "type": "integer",
+                          "example": 140
+                        },
+                        "lastCustomers": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/customer"
+                          }
+                        },
+                        "incomeExpenses": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "_id": {
+                                "type": "string",
+                                "example": "683f39297520d923c30c2b8c"
+                              },
+                              "amount": {
+                                "type": "string",
+                                "example": "+249.88"
+                              },
+                              "name": {
+                                "type": "string",
+                                "example": "Cruip.com Market Ltd 70 Wilson St London"
+                              },
+                              "type": {
+                                "type": "string",
+                                "enum": [
+                                  "Income",
+                                  "Expense",
+                                  "Error"
+                                ],
+                                "example": "income"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        }
+      }
+    },
+    "/api/orders": {
+      "get": {
+        "tags": [
+          "Orders"
+        ],
+        "summary": "Get list of orders",
+        "operationId": "getOrders",
+        "description": "Get list of orders with this endpoint",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "page",
+            "schema": {
+              "type": "integer",
+              "example": 1
+            }
+          },
+          {
+            "in": "query",
+            "name": "perPage",
+            "schema": {
+              "type": "integer",
+              "example": 10
+            }
+          },
+          {
+            "in": "query",
+            "name": "sortBy",
+            "schema": {
+              "type": "string",
+              "example": "name"
+            },
+            "description": "All order's fields can be mentioned. Default value - _id"
+          },
+          {
+            "in": "query",
+            "name": "sortOrder",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "asc",
+                "desc"
+              ],
+              "example": "asc"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully found orders!",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message",
+                    "data"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 200
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Successfully found orders!"
+                    },
+                    "data": {
+                      "type": "object",
+                      "required": [
+                        "data",
+                        "page",
+                        "perPage",
+                        "totalItems",
+                        "totalPages",
+                        "hasNextPage",
+                        "hasPreviousPage"
+                      ],
+                      "properties": {
+                        "data": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/order"
+                          }
+                        },
+                        "page": {
+                          "type": "number",
+                          "example": 1
+                        },
+                        "perPage": {
+                          "type": "number",
+                          "example": 10
+                        },
+                        "totalItems": {
+                          "type": "number",
+                          "example": 40
+                        },
+                        "totalPages": {
+                          "type": "number",
+                          "example": 4
+                        },
+                        "hasNextPage": {
+                          "type": "boolean",
+                          "example": true
+                        },
+                        "hasPreviousPage": {
+                          "type": "boolean",
+                          "example": false
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        }
+      }
+    },
+    "/api/products": {
+      "get": {
+        "tags": [
+          "Products"
+        ],
+        "summary": "Get list of products",
+        "operationId": "getProducts",
+        "description": "Get list of products with this endpoint",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "page",
+            "schema": {
+              "type": "integer",
+              "example": 1
+            }
+          },
+          {
+            "in": "query",
+            "name": "perPage",
+            "schema": {
+              "type": "integer",
+              "example": 10
+            }
+          },
+          {
+            "in": "query",
+            "name": "sortBy",
+            "schema": {
+              "type": "string",
+              "example": "name"
+            },
+            "description": "All product's fields can be mentioned. Default value - _id"
+          },
+          {
+            "in": "query",
+            "name": "sortOrder",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "asc",
+                "desc"
+              ],
+              "example": "asc"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully found products!",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message",
+                    "data"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 200
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Successfully found products!"
+                    },
+                    "data": {
+                      "type": "object",
+                      "required": [
+                        "data",
+                        "page",
+                        "perPage",
+                        "totalItems",
+                        "totalPages",
+                        "hasNextPage",
+                        "hasPreviousPage"
+                      ],
+                      "properties": {
+                        "data": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/product"
+                          }
+                        },
+                        "page": {
+                          "type": "integer",
+                          "example": 1
+                        },
+                        "perPage": {
+                          "type": "integer",
+                          "example": 10
+                        },
+                        "totalItems": {
+                          "type": "integer",
+                          "example": 40
+                        },
+                        "totalPages": {
+                          "type": "integer",
+                          "example": 4
+                        },
+                        "hasNextPage": {
+                          "type": "boolean",
+                          "example": true
+                        },
+                        "hasPreviousPage": {
+                          "type": "boolean",
+                          "example": false
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Products"
+        ],
+        "summary": "Create a new product",
+        "operationId": "createProduct",
+        "description": "Create a new product with payload",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "name",
+                  "suppliers",
+                  "stock",
+                  "price",
+                  "category"
+                ],
+                "properties": {
+                  "name": {
+                    "description": "Product name",
+                    "type": "string",
+                    "example": "Ibuprofen"
+                  },
+                  "suppliers": {
+                    "description": "Product suppliers",
+                    "type": "string",
+                    "example": "Beximco"
+                  },
+                  "stock": {
+                    "description": "Product stock",
+                    "type": "string",
+                    "example": "09"
+                  },
+                  "price": {
+                    "description": "Product price",
+                    "type": "string",
+                    "example": "19.99"
+                  },
+                  "category": {
+                    "description": "Product category",
+                    "type": "string",
+                    "example": "Head"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Successfully created a product!",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message",
+                    "data"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 201
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Successfully created a product!"
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/product"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        }
+      }
+    },
+    "/api/products/{productId}": {
+      "put": {
+        "tags": [
+          "Products"
+        ],
+        "summary": "Update a product",
+        "operationId": "upsertProduct",
+        "description": "Update a product with payload",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "productId",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "60c72b2f9b1e8a001c8e4f5a"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "description": "Product name",
+                    "type": "string",
+                    "example": "Ibuprofen"
+                  },
+                  "suppliers": {
+                    "description": "Product suppliers",
+                    "type": "string",
+                    "example": "Beximco"
+                  },
+                  "stock": {
+                    "description": "Product stock",
+                    "type": "string",
+                    "example": "09"
+                  },
+                  "price": {
+                    "description": "Product price",
+                    "type": "string",
+                    "example": "19.99"
+                  },
+                  "category": {
+                    "description": "Product category",
+                    "type": "string",
+                    "example": "Head"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Successfully upserted a product!",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message",
+                    "data"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 201
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Successfully upserted a product!"
+                    },
+                    "data": {
+                      "type": "object",
+                      "$ref": "#/components/schemas/product"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
+          },
+          "404": {
+            "description": "Product not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 404
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Product not found"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Products"
+        ],
+        "summary": "Delete a product",
+        "operationId": "deleteProduct",
+        "description": "Delete a product",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "productId",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "60c72b2f9b1e8a001c8e4f5a"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Successfully deleted the product!",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 204
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
+          },
+          "404": {
+            "description": "Product not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 404
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Product not found"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        }
+      }
+    },
+    "/api/suppliers": {
+      "get": {
+        "tags": [
+          "Suppliers"
+        ],
+        "summary": "Get list of suppliers",
+        "operationId": "getSuppliers",
+        "description": "Get list of suppliers with this endpoint",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "page",
+            "schema": {
+              "type": "integer",
+              "example": 1
+            }
+          },
+          {
+            "in": "query",
+            "name": "perPage",
+            "schema": {
+              "type": "integer",
+              "example": 10
+            }
+          },
+          {
+            "in": "query",
+            "name": "sortBy",
+            "schema": {
+              "type": "string",
+              "example": "name"
+            },
+            "description": "All supplier's fields can be mentioned. Default value - _id"
+          },
+          {
+            "in": "query",
+            "name": "sortOrder",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "asc",
+                "desc"
+              ],
+              "example": "asc"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully found suppliers!",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message",
+                    "data"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 200
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Successfully found suppliers!"
+                    },
+                    "data": {
+                      "type": "object",
+                      "required": [
+                        "data",
+                        "page",
+                        "perPage",
+                        "totalItems",
+                        "totalPages",
+                        "hasNextPage",
+                        "hasPreviousPage"
+                      ],
+                      "properties": {
+                        "data": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/supplier"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Suppliers"
+        ],
+        "summary": "Create a new supplier",
+        "operationId": "createSupplier",
+        "description": "Create a new supplier with payload",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "name",
+                  "address",
+                  "suppliers",
+                  "date",
+                  "amount",
+                  "status"
+                ],
+                "properties": {
+                  "name": {
+                    "description": "Supplier's name",
+                    "type": "string",
+                    "example": "Alex Shatov"
+                  },
+                  "address": {
+                    "description": "Supplier's address",
+                    "type": "string",
+                    "example": "Mripur-1"
+                  },
+                  "suppliers": {
+                    "description": "Supplier's suppliers",
+                    "type": "string",
+                    "example": "Square"
+                  },
+                  "date": {
+                    "description": "Supplier's date",
+                    "type": "string",
+                    "example": "September 19, 2023"
+                  },
+                  "amount": {
+                    "description": "Supplier's amount",
+                    "type": "string",
+                    "example": "৳ 6952.53"
+                  },
+                  "status": {
+                    "description": "Supplier's status",
+                    "type": "string",
+                    "enum": [
+                      "Active",
+                      "Deactive"
+                    ],
+                    "example": "Active"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Successfully created a supplier!",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message",
+                    "data"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 201
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Successfully created a supplier!"
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/supplier"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        }
+      }
+    },
+    "/api/suppliers/{supplierId}": {
+      "put": {
+        "tags": [
+          "Suppliers"
+        ],
+        "summary": "Update a supplier",
+        "operationId": "upsertSupplier",
+        "description": "Update a supplier with payload",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "supplierId",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "683f39697520d923c30c2c12"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "name",
+                  "address",
+                  "suppliers",
+                  "date",
+                  "amount",
+                  "status"
+                ],
+                "properties": {
+                  "name": {
+                    "description": "Supplier's name",
+                    "type": "string",
+                    "example": "Alex Shatov"
+                  },
+                  "address": {
+                    "description": "Supplier's address",
+                    "type": "string",
+                    "example": "Mripur-1"
+                  },
+                  "suppliers": {
+                    "description": "Supplier's suppliers",
+                    "type": "string",
+                    "example": "Square"
+                  },
+                  "date": {
+                    "description": "Supplier's date",
+                    "type": "string",
+                    "example": "September 19, 2023"
+                  },
+                  "amount": {
+                    "description": "Supplier's amount",
+                    "type": "string",
+                    "example": "৳ 6952.53"
+                  },
+                  "status": {
+                    "description": "Supplier's status",
+                    "type": "string",
+                    "enum": [
+                      "Active",
+                      "Deactive"
+                    ],
+                    "example": "Active"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Successfully upserted a supplier!",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message",
+                    "data"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 201
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Successfully upserted a supplier!"
+                    },
+                    "data": {
+                      "type": "object",
+                      "$ref": "#/components/schemas/supplier"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
+          },
+          "404": {
+            "description": "Supplier not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 404
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Supplier not found"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        }
+      }
+    },
+    "/api/customers": {
+      "get": {
+        "tags": [
+          "Customers"
+        ],
+        "summary": "Get list of customers",
+        "operationId": "getCustomers",
+        "description": "Get list of customers with this endpoint",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "page",
+            "schema": {
+              "type": "integer",
+              "example": 1
+            }
+          },
+          {
+            "in": "query",
+            "name": "perPage",
+            "schema": {
+              "type": "integer",
+              "example": 10
+            }
+          },
+          {
+            "in": "query",
+            "name": "sortBy",
+            "schema": {
+              "type": "string",
+              "example": "name"
+            },
+            "description": "All customer's fields can be mentioned. Default value - _id"
+          },
+          {
+            "in": "query",
+            "name": "sortOrder",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "asc",
+                "desc"
+              ],
+              "example": "asc"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully found customers!",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message",
+                    "data"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 200
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Successfully found customers!"
+                    },
+                    "data": {
+                      "type": "object",
+                      "required": [
+                        "data",
+                        "page",
+                        "perPage",
+                        "totalItems",
+                        "totalPages",
+                        "hasNextPage",
+                        "hasPreviousPage"
+                      ],
+                      "properties": {
+                        "data": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/customer"
+                          }
+                        },
+                        "page": {
+                          "type": "integer",
+                          "example": 1
+                        },
+                        "perPage": {
+                          "type": "integer",
+                          "example": 10
+                        },
+                        "totalItems": {
+                          "type": "integer",
+                          "example": 40
+                        },
+                        "totalPages": {
+                          "type": "integer",
+                          "example": 4
+                        },
+                        "hasNextPage": {
+                          "type": "boolean",
+                          "example": true
+                        },
+                        "hasPreviousPage": {
+                          "type": "boolean",
+                          "example": false
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        }
+      }
+    },
+    "/api/customers/{customerId}": {
+      "get": {
+        "tags": [
+          "Customers"
+        ],
+        "summary": "Get customer by id",
+        "operationId": "getCustomerById",
+        "description": "Get customer by id",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "customerId",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "683f39107520d923c30c2b36"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully found customer with id!",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message",
+                    "data"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 200
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Successfully found customer with id 683f39107520d923c30c2b36!"
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/customer"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "404": {
+            "description": "Customer not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 404
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Customer not found"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        }
+      }
     }
   },
   "components": {
@@ -543,6 +1801,80 @@
           }
         }
       },
+      "401": {
+        "description": "Unauthorized error",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "required": [
+                "status",
+                "message",
+                "data"
+              ],
+              "properties": {
+                "status": {
+                  "type": "integer",
+                  "example": 401
+                },
+                "message": {
+                  "type": "string",
+                  "example": "UnauthorizedError"
+                },
+                "data": {
+                  "type": "object",
+                  "required": [
+                    "message"
+                  ],
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Access token expired"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "403": {
+        "description": "Forbidden error",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "required": [
+                "status",
+                "message",
+                "data"
+              ],
+              "properties": {
+                "status": {
+                  "type": "integer",
+                  "example": 403
+                },
+                "message": {
+                  "type": "string",
+                  "example": "ForbiddenError"
+                },
+                "data": {
+                  "type": "object",
+                  "required": [
+                    "message"
+                  ],
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Forbidden. Admins only."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
       "500": {
         "description": "Internal Server error",
         "content": {
@@ -577,6 +1909,223 @@
                 }
               }
             }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "customer": {
+        "type": "object",
+        "required": [
+          "_id",
+          "image",
+          "name",
+          "email",
+          "spent",
+          "phone",
+          "address",
+          "register_date"
+        ],
+        "properties": {
+          "_id": {
+            "description": "Customer's id",
+            "type": "string",
+            "example": "683f39107520d923c30c2b36"
+          },
+          "image": {
+            "description": "Link to customer's image",
+            "type": "string",
+            "example": "https://i.imgur.com/UYCE7Rr.png"
+          },
+          "name": {
+            "description": "Customer's name",
+            "type": "string",
+            "example": "Yuriy Hrytsenko"
+          },
+          "email": {
+            "description": "Customer's email",
+            "type": "string",
+            "example": "yuriy.hrytsenko@gmail.com"
+          },
+          "spent": {
+            "description": "Customer's spent money",
+            "type": "string",
+            "example": "2,750.90"
+          },
+          "phone": {
+            "description": "Customer's phone number",
+            "type": "string",
+            "example": "+380705677901"
+          },
+          "address": {
+            "description": "Customer's address",
+            "type": "string",
+            "example": "Saksahanskoho, Bldg. 8, Apt. 63"
+          },
+          "register_date": {
+            "description": "Customer's register date",
+            "type": "string",
+            "example": "Mar 5, 2024"
+          }
+        }
+      },
+      "order": {
+        "type": "object",
+        "required": [
+          "_id",
+          "photo",
+          "name",
+          "address",
+          "products",
+          "price",
+          "status",
+          "order_date"
+        ],
+        "properties": {
+          "_id": {
+            "description": "Order's id",
+            "type": "string",
+            "example": "683f39427520d923c30c2ba5"
+          },
+          "photo": {
+            "description": "Link to orders's photo",
+            "type": "string",
+            "example": "https://i.imgur.com/hz6bZkb.png"
+          },
+          "name": {
+            "description": "Order's name",
+            "type": "string",
+            "example": "Lina Kostenko"
+          },
+          "address": {
+            "description": "Order's address",
+            "type": "string",
+            "example": "Saksahanskoho, Bldg. 26, Apt. 123"
+          },
+          "products": {
+            "description": "Order's products",
+            "type": "string",
+            "example": "14"
+          },
+          "price": {
+            "description": "Order's price",
+            "type": "string",
+            "example": "280.57"
+          },
+          "status": {
+            "description": "Type of order's status",
+            "type": "string",
+            "enum": [
+              "Pending",
+              "Processing",
+              "Completed",
+              "Shipped",
+              "Delivered",
+              "Confirmed",
+              "Cancelled"
+            ],
+            "example": "Pending"
+          },
+          "order_date": {
+            "description": "Order's date",
+            "type": "string",
+            "example": "July 31, 2023"
+          }
+        }
+      },
+      "product": {
+        "type": "object",
+        "required": [
+          "_id",
+          "name",
+          "suppliers",
+          "stock",
+          "price",
+          "category"
+        ],
+        "properties": {
+          "_id": {
+            "description": "Product's id",
+            "type": "string",
+            "example": "2"
+          },
+          "name": {
+            "description": "Product's name",
+            "type": "string",
+            "example": "Ibuprofen"
+          },
+          "suppliers": {
+            "description": "Product's suppliers",
+            "type": "string",
+            "example": "Beximco"
+          },
+          "stock": {
+            "description": "Product's stock",
+            "type": "string",
+            "example": "09"
+          },
+          "price": {
+            "description": "Product's price",
+            "type": "string",
+            "example": "53.76"
+          },
+          "category": {
+            "description": "Product's category",
+            "type": "string",
+            "example": "Head"
+          }
+        }
+      },
+      "supplier": {
+        "type": "object",
+        "required": [
+          "_id",
+          "name",
+          "address",
+          "suppliers",
+          "date",
+          "amount",
+          "status"
+        ],
+        "properties": {
+          "_id": {
+            "description": "Supplier's id",
+            "type": "string",
+            "example": "683f39697520d923c30c2c12"
+          },
+          "name": {
+            "description": "Supplier's name",
+            "type": "string",
+            "example": "Alex Shatov"
+          },
+          "address": {
+            "description": "Supplier's address",
+            "type": "string",
+            "example": "Mripur-1"
+          },
+          "suppliers": {
+            "description": "Supplier's suppliers",
+            "type": "string",
+            "example": "Square"
+          },
+          "date": {
+            "description": "Supplier's date",
+            "type": "string",
+            "example": "September 19, 2023"
+          },
+          "amount": {
+            "description": "Supplier's amount",
+            "type": "string",
+            "example": "৳ 6952.53"
+          },
+          "status": {
+            "description": "Supplier's status",
+            "type": "string",
+            "enum": [
+              "Active",
+              "Deactive"
+            ],
+            "example": "Active"
           }
         }
       }

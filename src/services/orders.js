@@ -14,10 +14,6 @@ export const getAllOrders = async ({
 
   const ordersQuery = OrdersCollection.find();
 
-  // if (filter.name) {
-  //   ordersQuery.where('name').equals(filter.name);
-  // }
-
   if (filter.name) {
     const nameRegex = new RegExp(filter.name, 'i');
     ordersQuery.where('name').regex(nameRegex);

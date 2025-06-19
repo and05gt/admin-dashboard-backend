@@ -1,0 +1,43 @@
+type: object
+required:
+  - _id
+  - image
+  - name
+  - email
+  - spent
+  - phone
+  - address
+  - register_date
+properties:
+  _id:
+    description: "Customer's id"
+    type: string
+    example: '683f39107520d923c30c2b36'
+  image:
+    description: "Link to customer's image"
+    type: string
+    example: 'https://i.imgur.com/UYCE7Rr.png'
+  name:
+    description: "Customer's name"
+    type: string
+    example: 'Yuriy Hrytsenko'
+  email:
+    description: "Customer's email"
+    type: string
+    example: 'yuriy.hrytsenko@gmail.com'
+  spent:
+    description: "Customer's spent money"
+    type: string
+    example: '2,750.90'
+  phone:
+    description: "Customer's phone number"
+    type: string
+    example: '+380705677901'
+  address:
+    description: "Customer's address"
+    type: string
+    example: 'Saksahanskoho, Bldg. 8, Apt. 63'
+  register_date:
+    description: "Customer's register date"
+    type: string
+    example: 'Mar 5, 2024'

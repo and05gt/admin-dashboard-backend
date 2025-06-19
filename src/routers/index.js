@@ -10,7 +10,7 @@ import { authenticate } from '../middlewares/authenticate.js';
 const router = Router();
 
 router.use('/api/user', authRouter);
-router.use('/api/dashboard', dashboardRouter);
+router.use('/api/dashboard', authenticate, dashboardRouter);
 router.use('/api/orders', authenticate, ordersRouter);
 router.use('/api/products', authenticate, productsRouter);
 router.use('/api/suppliers', authenticate, suppliersRouter);

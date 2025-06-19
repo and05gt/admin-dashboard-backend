@@ -34,6 +34,36 @@ paths:
   /api/user/user-info:
     get:
       $ref: ../swagger/paths/auth/user-info.yaml
+  /api/dashboard:
+    get:
+      $ref: ../swagger/paths/dashboard/get.yaml
+  /api/orders:
+    get:
+      $ref: ../swagger/paths/orders/get.yaml
+  /api/products:
+    get:
+      $ref: ../swagger/paths/products/get.yaml
+    post:
+      $ref: ../swagger/paths/products/post.yaml
+  /api/products/{productId}:
+    put:
+      $ref: ../swagger/paths/products/{productId}/put.yaml
+    delete:
+      $ref: ../swagger/paths/products/{productId}/delete.yaml
+  /api/suppliers:
+    get:
+      $ref: ../swagger/paths/suppliers/get.yaml
+    post:
+      $ref: ../swagger/paths/suppliers/post.yaml
+  /api/suppliers/{supplierId}:
+    put:
+      $ref: ../swagger/paths/suppliers/{supplierId}/put.yaml
+  /api/customers:
+    get:
+      $ref: ../swagger/paths/customers/get.yaml
+  /api/customers/{customerId}:
+    get:
+      $ref: ../swagger/paths/customers/{customerId}/get.yaml
 components:
   securitySchemes:
     bearerAuth:

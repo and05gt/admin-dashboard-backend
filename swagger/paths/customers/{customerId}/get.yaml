@@ -1,0 +1,54 @@
+tags:
+  - Customers
+summary: Get customer by id
+operationId: getCustomerById
+description: 'Get customer by id'
+security:
+  - bearerAuth: []
+parameters:
+  - in: path
+    name: customerId
+    required: true
+    schema:
+      type: string
+      example: '683f39107520d923c30c2b36'
+responses:
+  '200':
+    description: 'Successfully found customer with id!'
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - status
+            - message
+            - data
+          properties:
+            status:
+              type: integer
+              example: 200
+            message:
+              type: string
+              example: 'Successfully found customer with id 683f39107520d923c30c2b36!'
+            data:
+              $ref: '../../../components/schemas/customer.yaml'
+  '401':
+    $ref: '../../../components/responses/401.yaml'
+  '404':
+    description: 'Customer not found'
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - status
+            - message
+          properties:
+            status:
+              type: integer
+              example: 404
+            message:
+              type: string
+              example: 'Customer not found'
+  '500':
+    $ref: '../../../components/responses/500.yaml'

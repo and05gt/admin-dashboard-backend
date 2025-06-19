@@ -34,7 +34,7 @@ npm run install, npm run start
 
 ## API Documentation
 
-https://admin-dashboard-backend-t6zq.onrender.com
+https://admin-dashboard-backend-t6zq.onrender.com/api-docs
 
 ---
 
@@ -72,4 +72,4 @@ npm run install, npm run start
 
 ## API Документація
 
-https://admin-dashboard-backend-t6zq.onrender.com
+https://admin-dashboard-backend-t6zq.onrender.com/api-docs

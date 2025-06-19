@@ -1,0 +1,53 @@
+type: object
+required:
+  - _id
+  - photo
+  - name
+  - address
+  - products
+  - price
+  - status
+  - order_date
+properties:
+  _id:
+    description: "Order's id"
+    type: string
+    example: '683f39427520d923c30c2ba5'
+  photo:
+    description: "Link to orders's photo"
+    type: string
+    example: https://i.imgur.com/hz6bZkb.png
+  name:
+    description: "Order's name"
+    type: string
+    example: 'Lina Kostenko'
+  address:
+    description: "Order's address"
+    type: string
+    example: 'Saksahanskoho, Bldg. 26, Apt. 123'
+  products:
+    description: "Order's products"
+    type: string
+    example: '14'
+  price:
+    description: "Order's price"
+    type: string
+    example: '280.57'
+  status:
+    description: "Type of order's status"
+    type: string
+    enum:
+      [
+        'Pending',
+        'Processing',
+        'Completed',
+        'Shipped',
+        'Delivered',
+        'Confirmed',
+        'Cancelled',
+      ]
+    example: 'Pending'
+  order_date:
+    description: "Order's date"
+    type: string
+    example: 'July 31, 2023'

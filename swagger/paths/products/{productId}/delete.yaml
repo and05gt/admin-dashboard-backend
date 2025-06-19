@@ -1,0 +1,49 @@
+tags:
+  - Products
+summary: Delete a product
+operationId: deleteProduct
+description: 'Delete a product'
+security:
+  - bearerAuth: []
+parameters:
+  - in: path
+    name: productId
+    required: true
+    schema:
+      type: string
+      example: '60c72b2f9b1e8a001c8e4f5a'
+responses:
+  '204':
+    description: 'Successfully deleted the product!'
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - status
+          properties:
+            status:
+              type: integer
+              example: 204
+  '401':
+    $ref: '../../../components/responses/401.yaml'
+  '403':
+    $ref: '../../../components/responses/403.yaml'
+  '404':
+    description: 'Product not found'
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - status
+            - message
+          properties:
+            status:
+              type: integer
+              example: 404
+            message:
+              type: string
+              example: 'Product not found'
+  '500':
+    $ref: ../../../components/responses/500.yaml

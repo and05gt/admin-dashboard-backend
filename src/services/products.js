@@ -14,10 +14,6 @@ export const getAllProducts = async ({
 
   const productsQuery = ProductsCollection.find();
 
-  // if (filter.name) {
-  //   productsQuery.where('name').equals(filter.name);
-  // }
-
   if (filter.name) {
     const nameRegex = new RegExp(filter.name, 'i');
     productsQuery.where('name').regex(nameRegex);
