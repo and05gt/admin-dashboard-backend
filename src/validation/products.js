@@ -6,5 +6,17 @@ export const createProductSchema = Joi.object({
   suppliers: Joi.string().required(),
   stock: Joi.string().required(),
   price: Joi.string().required(),
-  category: Joi.string().required(),
+  category: Joi.string()
+    .valid(
+      'Medicine',
+      'Head',
+      'Hand',
+      'Dental Care',
+      'Skin Care',
+      'Eye Care',
+      'Vitamins & Supplements',
+      'Orthopedic Products',
+      'Baby Care',
+    )
+    .required(),
 });

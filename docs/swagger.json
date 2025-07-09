@@ -916,6 +916,17 @@
                   "category": {
                     "description": "Product category",
                     "type": "string",
+                    "enum": [
+                      "Medicine",
+                      "Head",
+                      "Hand",
+                      "Dental Care",
+                      "Skin Care",
+                      "Eye Care",
+                      "Vitamins & Supplements",
+                      "Orthopedic Products",
+                      "Baby Care"
+                    ],
                     "example": "Head"
                   }
                 }
@@ -1020,6 +1031,17 @@
                   "category": {
                     "description": "Product category",
                     "type": "string",
+                    "enum": [
+                      "Medicine",
+                      "Head",
+                      "Hand",
+                      "Dental Care",
+                      "Skin Care",
+                      "Eye Care",
+                      "Vitamins & Supplements",
+                      "Orthopedic Products",
+                      "Baby Care"
+                    ],
                     "example": "Head"
                   }
                 }
@@ -2072,6 +2094,17 @@
           "category": {
             "description": "Product's category",
             "type": "string",
+            "enum": [
+              "Medicine",
+              "Head",
+              "Hand",
+              "Dental Care",
+              "Skin Care",
+              "Eye Care",
+              "Vitamins & Supplements",
+              "Orthopedic Products",
+              "Baby Care"
+            ],
             "example": "Head"
           }
         }
