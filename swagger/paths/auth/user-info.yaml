@@ -4,6 +4,14 @@ summary: Get current user information
 operationId: getCurrentUser
 description: Retrieve the information of the currently authenticated user
 security: []
+parameters:
+  - in: header
+    description: 'The token issued to the current user'
+    name: Authorization
+    required: true
+    schema:
+      type: string
+      example: '0nEt+68+wc+SMaHWgff4AXESq6H89ORy1HX85/mN'
 responses:
   '200':
     description: Successfully retrieved user information
