@@ -9,7 +9,7 @@ export const authenticate = async (req, res, next) => {
     return next(createHttpError(401, 'Please provide access token'));
   }
 
-  const [bearer, accessToken] = authorization.split(' ', 2);
+  const [bearer, accessToken] = authorization.split(' ');
 
   if (bearer !== 'Bearer' || !accessToken) {
     return next(createHttpError(401, 'Please provide access token'));

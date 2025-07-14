@@ -13,19 +13,25 @@ export const loginUser = async (payload) => {
     throw createHttpError(401, 'Email or password is incorrect');
   }
 
-  await Session.deleteOne({
-    userId: user._id,
-  });
+  // await Session.deleteOne({
+  //   userId: user._id,
+  // });
 
   const { accessToken, refreshToken } = generateTokens(user);
 
-  return await Session.create({
+  const sessionData = {
     userId: user._id,
     accessToken,
     refreshToken,
     accessTokenValidUntil: new Date(Date.now() + FIFTEEN_MINUTES),
     refreshTokenValidUntil: new Date(Date.now() + THIRTY_DAYS),
-  });
+  };
+
+  return await Session.findOneAndUpdate(
+    { userId: user._id },
+    { $set: sessionData },
+    { upsert: true, new: true },
+  );
 };
 
 export const logoutUser = async (sessionId) => {
