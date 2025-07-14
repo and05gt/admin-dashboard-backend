@@ -16,7 +16,17 @@ export const startServer = () => {
   app.use('/api-docs', swaggerDocs());
 
   app.use(express.json());
-  app.use(cors());
+
+  const origins = [
+    'http://localhost:5173',
+    'https://admin-dashboard-backend-t6zq.onrender.com',
+  ];
+  app.use(
+    cors({
+      origin: origins,
+      credentials: true,
+    }),
+  );
   app.use(cookieParser());
 
   app.use(
