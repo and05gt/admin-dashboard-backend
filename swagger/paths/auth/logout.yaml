@@ -5,12 +5,13 @@ operationId: logout
 description: Log out
 security: []
 parameters:
-  - in: cookie
-    name: sessionId
+  - in: header
+    description: 'The token issued to the current user'
+    name: Authorization
     required: true
     schema:
       type: string
-      example: '65e4decdd286b30065d54af9'
+      example: '0nEt+68+wc+SMaHWgff4AXESq6H89ORy1HX85/mN'
 responses:
   '200':
     description: 'User log out'

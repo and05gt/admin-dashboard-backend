@@ -48,10 +48,14 @@ responses:
               type: object
               required:
                 - accessToken
+                - email
               properties:
                 accessToken:
                   type: string
                   example: '0nEt+68+wc+SMaHWgff4AXESq6H89ORy1HX85/mN'
+                email:
+                  type: string
+                  example: 'vendor@gmail.com'
   '401':
     description: 'Email or password is incorrect'
     content:

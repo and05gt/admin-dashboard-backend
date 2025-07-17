@@ -107,12 +107,17 @@
                     "data": {
                       "type": "object",
                       "required": [
-                        "accessToken"
+                        "accessToken",
+                        "email"
                       ],
                       "properties": {
                         "accessToken": {
                           "type": "string",
                           "example": "0nEt+68+wc+SMaHWgff4AXESq6H89ORy1HX85/mN"
+                        },
+                        "email": {
+                          "type": "string",
+                          "example": "vendor@gmail.com"
                         }
                       }
                     }
@@ -175,12 +180,13 @@
         "security": [],
         "parameters": [
           {
-            "in": "cookie",
-            "name": "sessionId",
+            "in": "header",
+            "description": "The token issued to the current user",
+            "name": "Authorization",
             "required": true,
             "schema": {
               "type": "string",
-              "example": "65e4decdd286b30065d54af9"
+              "example": "0nEt+68+wc+SMaHWgff4AXESq6H89ORy1HX85/mN"
             }
           }
         ],
