@@ -1,4 +1,4 @@
-import { getCurrentUser } from '../services/auth.js';
+import { User } from '../db/models/user.js';
 import { verifyToken } from '../utils/token.js';
 
 export const checkRole = async (req, res, next) => {
@@ -9,12 +9,13 @@ export const checkRole = async (req, res, next) => {
   }
 
   const decodedToken = verifyToken(token);
+  console.log(decodedToken);
 
   if (decodedToken.error) {
     return res.status(403).json({ error: decodedToken.error });
   }
 
-  const user = await getCurrentUser(decodedToken.id);
+  const user = await User.findById(decodedToken.id);
 
   if (user.role !== 'admin') {
     return res.status(403).json({ error: 'Forbidden. Admins only.' });
