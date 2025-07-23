@@ -70,5 +70,9 @@ export const deleteProductController = async (req, res, next) => {
     return;
   }
 
-  res.status(204).send();
+  res.json({
+    status: 200,
+    message: 'Successfully deleted a product!',
+    data: result._id,
+  });
 };

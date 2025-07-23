@@ -13,18 +13,26 @@ parameters:
       type: string
       example: '60c72b2f9b1e8a001c8e4f5a'
 responses:
-  '204':
-    description: 'Successfully deleted the product!'
+  '200':
+    description: 'Successfully deleted a product!'
     content:
       application/json:
         schema:
           type: object
           required:
             - status
+            - message
+            - data
           properties:
             status:
               type: integer
-              example: 204
+              example: 200
+            message:
+              type: string
+              example: 'Successfully deleted a product!'
+            data:
+              type: string
+              example: '60c72b2f9b1e8a001c8e4f5a'
   '401':
     $ref: '../../../components/responses/401.yaml'
   '403':
