@@ -10,7 +10,9 @@ export const createProductSchema = Joi.object({
     .valid(
       'Medicine',
       'Head',
+      'Heart',
       'Hand',
+      'Leg',
       'Dental Care',
       'Skin Care',
       'Eye Care',

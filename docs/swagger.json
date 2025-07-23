@@ -929,7 +929,9 @@
                     "enum": [
                       "Medicine",
                       "Head",
+                      "Heart",
                       "Hand",
+                      "Leg",
                       "Dental Care",
                       "Skin Care",
                       "Eye Care",
@@ -1044,7 +1046,9 @@
                     "enum": [
                       "Medicine",
                       "Head",
+                      "Heart",
                       "Hand",
+                      "Leg",
                       "Dental Care",
                       "Skin Care",
                       "Eye Care",
@@ -2107,7 +2111,9 @@
             "enum": [
               "Medicine",
               "Head",
+              "Heart",
               "Hand",
+              "Leg",
               "Dental Care",
               "Skin Care",
               "Eye Care",

@@ -13,7 +13,9 @@ const productSchema = new Schema(
       enum: [
         'Medicine',
         'Head',
+        'Heart',
         'Hand',
+        'Leg',
         'Dental Care',
         'Skin Care',
         'Eye Care',
