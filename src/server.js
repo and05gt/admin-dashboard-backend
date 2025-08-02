@@ -19,6 +19,7 @@ export const startServer = () => {
 
   const origins = [
     'http://localhost:5173',
+    'https://admin-dashboard-frontend-silk.vercel.app',
     'https://admin-dashboard-backend-t6zq.onrender.com',
   ];
   app.use(
